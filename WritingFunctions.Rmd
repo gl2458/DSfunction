@@ -1,0 +1,54 @@
+---
+title: "Writing Functions"
+author: "Rachel Lee"
+date: "4/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r data}
+
+library(tidyverse)
+library(rvest)
+
+set.seed(1)
+
+```
+
+Section: My First Function 
+
+```{r firstfunction}
+
+x_vec = rnorm(25, mean = 5, sd = 3)
+
+#computing z score w/o writing a function
+(x_vec - mean(x_vec)) / sd(x_vec) 
+
+#computing z score w/ a function
+z_scores = function(x) {
+  z = (x - mean(x)) / sd(x) 
+  z #return z
+}
+
+z_scores(x_vec)
+
+
+#adding conditional statements 
+
+z_scores = function(x) {
+  if(!is.numeric(x)){
+    stop("Argument x should be numeric")
+  } else if (length(x) == 1){
+    stop("Z scores cannot be computed for length 1 vectors")
+  }
+
+  z = mean(x) / sd(x)
+  z
+}
+
+
+```
+
